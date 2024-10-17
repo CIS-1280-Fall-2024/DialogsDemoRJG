@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DialogsDemo.DisplayPromptDemoPage"
+             Title="DisplayPromptDemoPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Display Prompt"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button x:Name="DisplayPromptButton" Text="Display Prompt" Clicked="DisplayPromptButton_ClickedAsync"/>
+
+        <Label 
+            Text="Display Numeric Prompt"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button x:Name="DisplayNumericPromptButton" Text="Display Numeric Prompt" Clicked="DisplayNumericPromptButton_ClickedAsync"/>
+    </VerticalStackLayout>
+</ContentPage>
