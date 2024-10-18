@@ -12,6 +12,6 @@
         <Entry x:Name="DescriptionEntry" Placeholder="Enter Description" />
         <DatePicker x:Name="DateCreatedPicker"/>
         <DatePicker x:Name="DateCompletedPicker"/>
-        
+        <Button x:Name="SubmitToDoButton" Text="Submit" Clicked="SubmitToDoButton_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -23,4 +23,8 @@
         Title="Display Prompt Demos"
         ContentTemplate="{DataTemplate local:DisplayPromptDemoPage}"
         Route="DisplayPromptDemoPage" />
+    <ShellContent
+        Title="Display Custom Dialog Demo"
+        ContentTemplate="{DataTemplate local:CustomDialogDemoPage}"
+        Route="CustomDialogDemoPage" />
 </Shell>
