@@ -39,7 +39,6 @@ public partial class CustomDialogDemoPage : ContentPage
 
     private async void ShowCustomDialogButton_ClickedAsync(object sender, EventArgs e)
     {
-        ToDo item = new ToDo();
         await Navigation.PushModalAsync(new ToDoPage(UpdateToDoList)); //<-- How do we access this in UpdateToDoList?
         Debug.WriteLine($"New todo is {item.Title}");
     }
