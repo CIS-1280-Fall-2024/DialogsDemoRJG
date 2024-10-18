@@ -8,7 +8,7 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <ListView x:Name="ToDoListView"/>
+        <ListView x:Name="ToDoListView" ItemSelected="ToDoListView_ItemSelectedAsync"/>
         <Button x:Name="ShowCustomDialogButton"  Text="Add To Do Item" Clicked="ShowCustomDialogButton_ClickedAsync"/>
     </VerticalStackLayout>
 </ContentPage>

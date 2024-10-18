@@ -1,16 +1,18 @@
 using DialogsDemo.Models;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace DialogsDemo;
 
 public partial class CustomDialogDemoPage : ContentPage
 {
-	List<ToDo>? toDos;
+	ObservableCollection<ToDo>? toDos;
+    ToDoPage toDoPage;
 
-	public CustomDialogDemoPage()
+    public CustomDialogDemoPage()
 	{
 		InitializeComponent();
-		toDos = new List<ToDo>();
+		toDos = new ObservableCollection<ToDo>();
 		toDos.Add(new ToDo()
 			{
 				Title = "Go shopping",
@@ -37,14 +39,26 @@ public partial class CustomDialogDemoPage : ContentPage
         ToDoListView.ItemsSource = toDos;
 	}
 
+
     private async void ShowCustomDialogButton_ClickedAsync(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new ToDoPage(UpdateToDoList)); //<-- How do we access this in UpdateToDoList?
+        toDoPage = new ToDoPage(UpdateToDoList);
+        await Navigation.PushModalAsync(toDoPage); //<-- How do we access this in UpdateToDoList?
     }
 
     public void UpdateToDoList()
     {
         //TODO: Get access to the ToDo property in the ToDoPage here.
-        Debug.WriteLine($"UpdateToDoList called");
+        ToDo toDo = toDoPage.ToDo;
+        toDos.Add(toDo);
+        Debug.WriteLine($"Added new ToDo item {toDo.Title} to list.");
+    }
+
+    private async void ToDoListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
+    {
+        ToDo item = (ToDo) e.SelectedItem; //Unbox (cast) to original type
+        Debug.WriteLine($"Item {item.Title} selected!");
+        toDoPage = new ToDoPage(UpdateToDoList, item);
+        await Navigation.PushModalAsync(toDoPage);
     }
 }

@@ -14,6 +14,13 @@ public partial class ToDoPage : ContentPage
 		ToDo = new ToDo();
 	}
 
+	public ToDoPage(Action updateMethod, ToDo toDo)
+	{
+        _updateMethod = updateMethod;
+        InitializeComponent();
+        ToDo = toDo;
+    }
+
     private async void SubmitToDoButton_Clicked(object sender, EventArgs e)
     {
 		// Load model object from form controls
