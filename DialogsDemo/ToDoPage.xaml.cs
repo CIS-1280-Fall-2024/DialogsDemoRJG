@@ -19,6 +19,13 @@ public partial class ToDoPage : ContentPage
         _updateMethod = updateMethod;
         InitializeComponent();
         ToDo = toDo;
+		TitleEntry.Text = toDo.Title;
+		DescriptionEntry.Text = toDo.Description;
+		DateCreatedPicker.Date = toDo.DateCreated;
+		if (toDo.DateCompleted != null)
+		{
+			DateCompletedPicker.Date = (DateTime) toDo.DateCompleted;
+		}
     }
 
     private async void SubmitToDoButton_Clicked(object sender, EventArgs e)
