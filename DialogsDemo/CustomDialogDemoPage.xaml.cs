@@ -40,13 +40,13 @@ public partial class CustomDialogDemoPage : ContentPage
 	}
 
 
-    private async void ShowCustomDialogButton_ClickedAsync(object sender, EventArgs e)
+    private async void AddTodoItem_Clicked(object sender, EventArgs e)
     {
-        toDoPage = new ToDoPage(UpdateToDoList);
+        toDoPage = new ToDoPage(AddTodoItem);
         await Navigation.PushModalAsync(toDoPage); //<-- How do we access this in UpdateToDoList?
     }
 
-    public void UpdateToDoList()
+    public void AddTodoItem()
     {
         //TODO: Get access to the ToDo property in the ToDoPage here.
         ToDo toDo = toDoPage.ToDo;
@@ -54,11 +54,27 @@ public partial class CustomDialogDemoPage : ContentPage
         Debug.WriteLine($"Added new ToDo item {toDo.Title} to list.");
     }
 
+    public void UpdateToDoItem()
+    {
+        ToDoListView.ItemsSource = null;
+        ToDoListView.ItemsSource = toDos;
+    }
+
+    public void DeleteToDoItem()
+    {
+        if (item != null)
+        {
+            toDos?.Remove(item);
+        }
+    }
+
+    ToDo? item;
+
     private async void ToDoListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
     {
-        ToDo item = (ToDo) e.SelectedItem; //Unbox (cast) to original type
-        Debug.WriteLine($"Item {item.Title} selected!");
-        toDoPage = new ToDoPage(UpdateToDoList, item);
+        item = (ToDo) e.SelectedItem; //Unbox (cast) to original type
+        toDoPage = new ToDoPage(UpdateToDoItem, DeleteToDoItem, item);
         await Navigation.PushModalAsync(toDoPage);
     }
+
 }

@@ -6,6 +6,7 @@ public partial class ToDoPage : ContentPage
 {
 	public ToDo ToDo { get; set; }
 	private Action _updateMethod;
+	private Action? _deleteMethod;
 
     public ToDoPage(Action updateMethod)
 	{
@@ -14,10 +15,12 @@ public partial class ToDoPage : ContentPage
 		ToDo = new ToDo();
 	}
 
-	public ToDoPage(Action updateMethod, ToDo toDo)
+	public ToDoPage(Action updateMethod, Action deleteMethod, ToDo toDo)
 	{
         _updateMethod = updateMethod;
+        _deleteMethod = deleteMethod;
         InitializeComponent();
+		DeleteButton.IsVisible = true;
         ToDo = toDo;
 		TitleEntry.Text = toDo.Title;
 		DescriptionEntry.Text = toDo.Description;
@@ -41,7 +44,23 @@ public partial class ToDoPage : ContentPage
 
 		// Return control back to parent form 
 		await Navigation.PopModalAsync();
-
     }
 
+    private async void CancelButton_ClickedAsync(object sender, EventArgs e)
+    {
+        // Return control back to parent form 
+        await Navigation.PopModalAsync();
+    }
+
+    private async void DeleteButton_ClickedAsync(object sender, EventArgs e)
+    {
+		if (_deleteMethod != null)
+		{
+			//Delete item
+			_deleteMethod();
+
+			// Return control back to parent form 
+			await Navigation.PopModalAsync();
+		}
+    }
 }

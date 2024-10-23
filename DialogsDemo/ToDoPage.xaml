@@ -13,5 +13,7 @@
         <DatePicker x:Name="DateCreatedPicker"/>
         <DatePicker x:Name="DateCompletedPicker"/>
         <Button x:Name="SubmitToDoButton" Text="Submit" Clicked="SubmitToDoButton_Clicked"/>
+        <Button x:Name="CancelButton" Text="Cancel" Clicked="CancelButton_ClickedAsync"/>
+        <Button IsVisible="False" x:Name="DeleteButton" Text="Delete" Clicked="DeleteButton_ClickedAsync"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -9,6 +9,6 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <ListView x:Name="ToDoListView" ItemSelected="ToDoListView_ItemSelectedAsync"/>
-        <Button x:Name="ShowCustomDialogButton"  Text="Add To Do Item" Clicked="ShowCustomDialogButton_ClickedAsync"/>
+        <Button x:Name="ShowCustomDialogButton"  Text="Add To Do Item" Clicked="AddTodoItem_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>
