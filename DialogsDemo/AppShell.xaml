@@ -27,4 +27,8 @@
         Title="Display Custom Dialog Demo"
         ContentTemplate="{DataTemplate local:CustomDialogDemoPage}"
         Route="CustomDialogDemoPage" />
+    <ShellContent
+        Title="Display File Picker Demo"
+        ContentTemplate="{DataTemplate local:FilePickerDemoPage}"
+        Route="FilePickerDemoPage" />
 </Shell>
