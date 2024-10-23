@@ -5,19 +5,19 @@ namespace DialogsDemo;
 public partial class ToDoPage : ContentPage
 {
 	public ToDo ToDo { get; set; }
-	private Action _updateMethod;
+	private Action _submitMethod;
 	private Action? _deleteMethod;
 
-    public ToDoPage(Action updateMethod)
+    public ToDoPage(Action submitMethod)
 	{
-		_updateMethod = updateMethod;
+		_submitMethod = submitMethod;
 		InitializeComponent();
 		ToDo = new ToDo();
 	}
 
-	public ToDoPage(Action updateMethod, Action deleteMethod, ToDo toDo)
+	public ToDoPage(Action submitMethod, Action deleteMethod, ToDo toDo)
 	{
-        _updateMethod = updateMethod;
+        _submitMethod = submitMethod;
         _deleteMethod = deleteMethod;
         InitializeComponent();
 		DeleteButton.IsVisible = true;
@@ -40,7 +40,7 @@ public partial class ToDoPage : ContentPage
 		ToDo.DateCompleted = DateCompletedPicker.Date;
 
 		// Update the parent form
-		_updateMethod();
+		_submitMethod();
 
 		// Return control back to parent form 
 		await Navigation.PopModalAsync();

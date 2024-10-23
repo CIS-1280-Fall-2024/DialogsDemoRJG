@@ -39,7 +39,6 @@ public partial class CustomDialogDemoPage : ContentPage
         ToDoListView.ItemsSource = toDos;
 	}
 
-
     private async void AddTodoItem_Clicked(object sender, EventArgs e)
     {
         toDoPage = new ToDoPage(AddTodoItem);
@@ -48,33 +47,35 @@ public partial class CustomDialogDemoPage : ContentPage
 
     public void AddTodoItem()
     {
-        //TODO: Get access to the ToDo property in the ToDoPage here.
-        ToDo toDo = toDoPage.ToDo;
-        toDos.Add(toDo);
-        Debug.WriteLine($"Added new ToDo item {toDo.Title} to list.");
+        toDos?.Add(toDoPage.ToDo);
+    }
+
+
+    private async void ToDoListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
+    {
+        //if (e.SelectedItem is ToDo) <--Not needed all items in listview are todo items.
+        //{
+            ToDo item = (ToDo) e.SelectedItem; //Unbox (cast) to original type
+            toDoPage = new ToDoPage(UpdateToDoItem, DeleteToDoItem, item);
+            await Navigation.PushModalAsync(toDoPage);
+        //}
     }
 
     public void UpdateToDoItem()
     {
+        //Refresh the list view, the item has already been modified
         ToDoListView.ItemsSource = null;
         ToDoListView.ItemsSource = toDos;
     }
 
     public void DeleteToDoItem()
     {
-        if (item != null)
+        if (toDoPage.ToDo != null)
         {
-            toDos?.Remove(item);
+            toDos?.Remove(toDoPage.ToDo);
         }
     }
 
-    ToDo? item;
 
-    private async void ToDoListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
-    {
-        item = (ToDo) e.SelectedItem; //Unbox (cast) to original type
-        toDoPage = new ToDoPage(UpdateToDoItem, DeleteToDoItem, item);
-        await Navigation.PushModalAsync(toDoPage);
-    }
 
 }
